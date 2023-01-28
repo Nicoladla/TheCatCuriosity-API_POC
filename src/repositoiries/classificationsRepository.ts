@@ -1,4 +1,4 @@
-import connection from "../database/db.js";
+import prisma from "../database/db.js";
 
 import {
   Classification,
@@ -6,26 +6,17 @@ import {
 } from "../protocols/ClassificationProtocol.js";
 
 export function fetchClassifications() {
-  return connection.query<Classification>(`SELECT * FROM classifications`);
+  return prisma.classifications.findMany();
 }
 
-export function fetchClassificationByName(classification: string) {
-  return connection.query<Classification>(
-    `SELECT * FROM classifications WHERE name=$1`,
-    [classification]
-  );
+export function fetchClassificationByName(name: string) {
+  return prisma.classifications.findUnique({ where: { name } });
 }
 
 export function fetchClassificationById(classificationId: number) {
-  return connection.query<Classification>(
-    `SELECT * FROM classifications WHERE id=$1`,
-    [classificationId]
-  );
+  return prisma.classifications.findUnique({ where: { id: classificationId } });
 }
 
-export function insertClassification(classification: string) {
-  return connection.query<ClassificationInsert>(
-    `INSERT INTO classifications (name) VALUES ($1)`,
-    [classification]
-  );
+export function insertClassification(name: string) {
+  return prisma.classifications.create({ data: { name } });
 }
