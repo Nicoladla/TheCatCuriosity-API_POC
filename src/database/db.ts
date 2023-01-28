@@ -1,12 +1,5 @@
-import pg from "pg"
-import dotenv from "dotenv"
+import { PrismaClient } from "@prisma/client";
 
-dotenv.config()
-const {Pool}= pg
+const prisma = new PrismaClient();
 
-const connection= new Pool({
-    connectionString: process.env.DATABASE_URL
-})
-console.log("connected database")
-
-export default connection;
+export default prisma;

@@ -1,5 +1,5 @@
 {
-  "name": "thecatcuriosity-poc-api",
+  "name": "thecatcuriosity-poc-api-prisma",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,16 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nicoladla/TheCatCuriosity-POC-API.git"
+    "url": "git+https://github.com/Nicoladla/TheCatCuriosity-POC-API-Prisma.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nicoladla/TheCatCuriosity-POC-API/issues"
+    "url": "https://github.com/Nicoladla/TheCatCuriosity-POC-API-Prisma/issues"
   },
-  "homepage": "https://github.com/Nicoladla/TheCatCuriosity-POC-API#readme",
+  "homepage": "https://github.com/Nicoladla/TheCatCuriosity-POC-API-Prisma#readme",
   "dependencies": {
+    "@prisma/client": "^4.9.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -33,6 +34,7 @@
     "@types/node": "^18.11.18",
     "@types/pg": "^8.6.6",
     "nodemon": "^2.0.20",
+    "prisma": "^4.9.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   }
