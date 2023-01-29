@@ -1,10 +1,5 @@
 import prisma from "../database/db.js";
 
-import {
-  Classification,
-  ClassificationInsert,
-} from "../protocols/ClassificationProtocol.js";
-
 export function fetchClassifications() {
   return prisma.classifications.findMany();
 }
@@ -17,6 +12,6 @@ export function fetchClassificationById(classificationsId: number) {
   return prisma.classifications.findUnique({ where: { id: classificationsId } });
 }
 
-export function insertClassification(name: string) {
+export function insertAClassification(name: string) {
   return prisma.classifications.create({ data: { name } });
 }
