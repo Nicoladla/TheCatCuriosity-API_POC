@@ -6,24 +6,20 @@ import {
 } from "../protocols/curiositiesProtocol.js";
 
 import {
-  fetchCuriosities,
-  fetchCuriositiesByClassification,
-  insertCuriosity,
-  updateACuriosity,
   deleteACuriosity,
-} from "../repositoiries/curiositiesRepository.js";
+  insertCuriosity,
+  selectCuriosities,
+  selectCuriositiesByClassification,
+  updateACuriosity,
+} from "../services/curiositiesServices.js";
 
 export async function getCuriosities(
   req: Request,
   res: Response
 ): Promise<void> {
-  try {
-    const listCuriosities = await fetchCuriosities();
+  const listCuriosities = await selectCuriosities();
 
-    res.status(200).send(listCuriosities);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
+  res.status(200).send(listCuriosities);
 }
 
 export async function getCuriositiesByClassification(
@@ -32,14 +28,10 @@ export async function getCuriositiesByClassification(
 ): Promise<void> {
   const classificationId: number = Number(req.params.classificationId);
 
-  try {
-    const listCuriositiesByClassification =
-      await fetchCuriositiesByClassification(classificationId);
+  const listCuriositiesByClassification =
+    await selectCuriositiesByClassification(classificationId);
 
-    res.status(200).send(listCuriositiesByClassification);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
+  res.status(200).send(listCuriositiesByClassification);
 }
 
 export async function postCuriosity(
@@ -48,13 +40,9 @@ export async function postCuriosity(
 ): Promise<void> {
   const curiosity = req.body as CuriositiesInsert;
 
-  try {
-    await insertCuriosity(curiosity);
+  await insertCuriosity(curiosity);
 
-    res.sendStatus(201);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
+  res.sendStatus(201);
 }
 
 export async function updateCuriosity(
@@ -64,13 +52,9 @@ export async function updateCuriosity(
   const editedCuriosity = req.body as CuriositiesUpdate;
   const curiosityId: number = Number(req.params.id);
 
-  try {
-    await updateACuriosity(editedCuriosity, curiosityId);
+  await updateACuriosity(editedCuriosity, curiosityId);
 
-    res.sendStatus(200);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
+  res.sendStatus(200);
 }
 
 export async function deleteCuriosity(
@@ -79,11 +63,7 @@ export async function deleteCuriosity(
 ): Promise<void> {
   const curiosityId: number = Number(req.params.id);
 
-  try {
-    await deleteACuriosity(curiosityId);
+  await deleteACuriosity(curiosityId);
 
-    res.sendStatus(200);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
+  res.sendStatus(200);
 }

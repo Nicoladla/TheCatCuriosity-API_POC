@@ -21,11 +21,11 @@ export function fetchCuriositiesByClassification(classificationsId: number) {
   });
 }
 
-export function insertCuriosity(curiosity: CuriositiesInsert) {
+export function insertACuriosity(curiosity: CuriositiesInsert) {
   return prisma.curiosities.create({ data: curiosity });
 }
 
-export function updateACuriosity(
+export function updateCuriosity(
   editedCuriosity: CuriositiesUpdate,
   curiosityId: number
 ) {
@@ -35,6 +35,6 @@ export function updateACuriosity(
   });
 }
 
-export function deleteACuriosity(curiosityId: number) {
+export function deleteCuriosity(curiosityId: number) {
   return prisma.curiosities.delete({ where: { id: curiosityId } });
 }
