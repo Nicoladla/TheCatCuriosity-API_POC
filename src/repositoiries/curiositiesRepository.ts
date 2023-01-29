@@ -15,11 +15,14 @@ export function fetchCuriosityById(curiosityId: number) {
 }
 
 export function fetchCuriositiesByClassification(classificationsId: number) {
-  return prisma.curiosities.findMany({ where: { classificationsId } });
+  return prisma.curiosities.findMany({
+    where: { classificationsId },
+    orderBy: { createdAt: "desc" },
+  });
 }
 
 export function insertCuriosity(curiosity: CuriositiesInsert) {
-  return prisma.curiosities.create({data: curiosity})
+  return prisma.curiosities.create({ data: curiosity });
 }
 
 export function updateACuriosity(
