@@ -3,7 +3,7 @@ export type Curiosities = {
   author: string;
   title: string;
   description: string;
-  classificationId: number;
+  classificationsId: number;
   createdAt: string | Date;
 };
 

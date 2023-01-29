@@ -1,5 +1,4 @@
-import { ResultBuilder } from "pg";
-import connection from "../database/db.js";
+import prisma from "../database/db.js";
 
 import {
   Curiosities,
@@ -8,50 +7,31 @@ import {
 } from "../protocols/curiositiesProtocol";
 
 export function fetchCuriosities() {
-  return connection.query<Curiosities>(
-    `SELECT * FROM curiosities ORDER BY "createdAt" DESC`
-  );
+  return prisma.curiosities.findMany({ orderBy: { createdAt: "desc" } });
 }
 
 export function fetchCuriosityById(curiosityId: number) {
-  return connection.query<Curiosities>(
-    `SELECT * FROM curiosities WHERE "id"=$1`,
-    [curiosityId]
-  );
+  return prisma.curiosities.findUnique({ where: { id: curiosityId } });
 }
 
-export function fetchCuriositiesByClassification(classificationId: number) {
-  return connection.query<Curiosities>(
-    `SELECT * FROM curiosities WHERE "classificationsId"=$1  ORDER BY "createdAt" DESC`,
-    [classificationId]
-  );
+export function fetchCuriositiesByClassification(classificationsId: number) {
+  return prisma.curiosities.findMany({ where: { classificationsId } });
 }
 
 export function insertCuriosity(curiosity: CuriositiesInsert) {
-  return connection.query<CuriositiesInsert>(
-    `INSERT INTO curiosities 
-        (author, title, description, "classificationsId") 
-    VALUES 
-        ($1, $2, $3, $4)`,
-    [
-      curiosity.author,
-      curiosity.title,
-      curiosity.description,
-      curiosity.classificationId,
-    ]
-  );
+  return prisma.curiosities.create({data: curiosity})
 }
 
 export function updateACuriosity(
   editedCuriosity: CuriositiesUpdate,
   curiosityId: number
 ) {
-  return connection.query<CuriositiesInsert>(
-    `UPDATE curiosities SET title=$1 , description=$2 WHERE id= $3`,
-    [editedCuriosity.title, editedCuriosity.description, curiosityId]
-  );
+  return prisma.curiosities.update({
+    where: { id: curiosityId },
+    data: editedCuriosity,
+  });
 }
 
 export function deleteACuriosity(curiosityId: number) {
-  return connection.query<object>(`DELETE FROM curiosities WHERE id=$1`, [curiosityId]);
+  return prisma.curiosities.delete({ where: { id: curiosityId } });
 }
