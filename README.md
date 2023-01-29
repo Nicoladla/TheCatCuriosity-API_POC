@@ -44,7 +44,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
         author: "Nicolas",
         title: "Qual o tamanho do universo?",
         description: "oito deitado...",
-        classificationId: 3,
+        classificationsId: 3,
         createdAt: "2023-01-20T00:00:00"
     },
     {
@@ -52,7 +52,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
         author: "Deivyd",
         title: "Do que o cérebro é formado?",
         description: "Ele é formado por aproximadamente, 75% de água...",
-        classificationId: 2,
+        classificationsId: 2,
         createdAt: "2023-01-20T00:00:00"
     },
     {
@@ -60,7 +60,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
         author: "Nicolas",
         title: "Porquê o ceu é azul?",
         description: "Por causa da atmosfera e do sol...",
-        classificationId: 2,
+        classificationsId: 2,
         createdAt: "2023-01-20T00:00:00"
     }
 ]
@@ -75,7 +75,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
         author: "Deivyd",
         title: "Do que o cérebro é formado?",
         description: "Ele é formado por aproximadamente, 75% de água...",
-        classificationId: 2,
+        classificationsId: 2,
         createdAt: "2023-01-20T00:00:00"
     },
     {
@@ -83,7 +83,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
         author: "Nicolas",
         title: "Porquê o ceu é azul?",
         description: "Por causa da atmosfera e do sol...",
-        classificationId: 2,
+        classificationsId: 2,
         createdAt: "2023-01-20T00:00:00"
     }
 ]
@@ -96,7 +96,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
         author: "Deivyd",
         title: "Do que o cérebro é formado?",
         description: "Ele é formado por aproximadamente, 75% de água...",
-        classificationId: 2,
+        classificationsId: 2,
     }
 ```
 
@@ -106,6 +106,7 @@ O usuário também é capaz de listar todas as classificações possíveis para 
     {
         title: "Do que o cérebro é formado?",
         description: "Ele é formado por aproximadamente, 75% de água...",
+        classificationsId: 3,
     }
 ```
 

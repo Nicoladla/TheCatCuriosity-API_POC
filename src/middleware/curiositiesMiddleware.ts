@@ -31,9 +31,9 @@ export async function validPostCuriosity(
     }
 
     const classificationExist = await fetchClassificationById(
-      curiosity.classificationId
+      curiosity.classificationsId
     );
-    if (classificationExist.rowCount === 0) {
+    if (!classificationExist) {
       res.status(400).send({ message: "Invalid classification" });
       return;
     }
@@ -76,13 +76,14 @@ export async function validateIfCuriosityExists(
 
   try {
     const curiosityExist = await fetchCuriosityById(curiosityId);
-    if (curiosityExist.rowCount === 0) {
+    if (!curiosityExist) {
       res.status(400).send({ message: "Invalid curiosity" });
       return;
     }
 
     next();
   } catch (err) {
+
     res.status(500).send({ message: err.message });
   }
 }

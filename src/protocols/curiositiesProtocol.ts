@@ -9,7 +9,6 @@ export type Curiosities = {
 
 export type CuriositiesInsert = Omit<Curiosities, "id" | "createdAt">;
 
-export type CuriositiesUpdate = Omit<
-  Curiosities,
-  "id" | "createdAt" | "author" | "classificationId"
+export type CuriositiesUpdate = Partial<
+  Omit<Curiosities, "id" | "createdAt" | "author">
 >;

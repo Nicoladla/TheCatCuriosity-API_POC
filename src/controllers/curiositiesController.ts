@@ -18,7 +18,7 @@ export async function getCuriosities(
   res: Response
 ): Promise<void> {
   try {
-    const { rows: listCuriosities } = await fetchCuriosities();
+    const listCuriosities = await fetchCuriosities();
 
     res.status(200).send(listCuriosities);
   } catch (err) {
@@ -33,7 +33,7 @@ export async function getCuriositiesByClassification(
   const classificationId: number = Number(req.params.classificationId);
 
   try {
-    const { rows: listCuriositiesByClassification } =
+    const listCuriositiesByClassification =
       await fetchCuriositiesByClassification(classificationId);
 
     res.status(200).send(listCuriositiesByClassification);

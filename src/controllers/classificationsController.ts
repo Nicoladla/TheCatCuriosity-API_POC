@@ -15,7 +15,7 @@ export async function getClassifications(
   try {
     const listClassifications = await fetchClassifications();
 
-    res.status(200).send(listClassifications.rows);
+    res.status(200).send(listClassifications);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -37,7 +37,7 @@ export async function postClassifications(
     const classificationExist = await fetchClassificationByName(
       classification.name
     );
-    if (classificationExist.rowCount === 1) {
+    if (classificationExist) {
       res.status(409).send({ message: "Existing classification" });
       return;
     }
