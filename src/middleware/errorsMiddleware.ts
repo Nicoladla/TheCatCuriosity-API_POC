@@ -11,5 +11,10 @@ export function handleErrorsMiddleware(
     return;
   }
 
+  if (err.type === "not_found_error") {
+    res.status(404).send({ message: err.message });
+    return;
+  }
+
   res.status(500).send({ message: err.message });
 }

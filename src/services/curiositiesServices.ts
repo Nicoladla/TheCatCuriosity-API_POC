@@ -1,3 +1,4 @@
+import { not_found_error } from "../errors/notFoundError.js";
 import {
   CuriositiesInsert,
   CuriositiesUpdate,
@@ -6,6 +7,7 @@ import {
   deleteCuriosity,
   fetchCuriosities,
   fetchCuriositiesByClassification,
+  fetchCuriosityById,
   insertACuriosity,
   updateCuriosity,
 } from "../repositoiries/curiositiesRepository.js";
@@ -38,4 +40,10 @@ export async function updateACuriosity(
 
 export async function deleteACuriosity(curiosityId: number) {
   await deleteCuriosity(curiosityId);
+}
+
+export async function checkByIdIfCuriosityExists(curiosityId: number) {
+  const curiosityExist = await fetchCuriosityById(curiosityId);
+  
+  if (!curiosityExist) throw not_found_error("curiosity");
 }

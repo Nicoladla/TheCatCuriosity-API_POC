@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import classificationSchema from "../schema/classificationsSchema.js";
 
 import {
-  checkIfClassificationExists,
+  checkIfClassificationExistsByName,
   insertClassification,
   selectClassifications,
 } from "../services/classificationsService.js";
@@ -31,7 +31,7 @@ export async function postClassifications(
     return;
   }
 
-  await checkIfClassificationExists(classification.name);
+  await checkIfClassificationExistsByName(classification.name);
 
   await insertClassification(classification.name);
 

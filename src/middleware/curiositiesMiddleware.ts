@@ -5,13 +5,12 @@ import {
   CuriositiesUpdate,
 } from "../protocols/curiositiesProtocol.js";
 
-import { fetchClassificationById } from "../repositoiries/classificationsRepository.js";
-import { fetchCuriosityById } from "../repositoiries/curiositiesRepository.js";
-
 import {
   curiositiesUpdateSchema,
   curiositySchema,
 } from "../schema/curiositiesSchema.js";
+import { checkIfClassificationExistsById } from "../services/classificationsService.js";
+import { checkByIdIfCuriosityExists } from "../services/curiositiesServices.js";
 
 export async function validPostCuriosity(
   req: Request,
@@ -20,28 +19,18 @@ export async function validPostCuriosity(
 ): Promise<void> {
   const curiosity = req.body as CuriositiesInsert;
 
-  try {
-    const { error } = curiositySchema.validate(curiosity, {
-      abortEarly: false,
-    });
-    if (error) {
-      const errors = error.details.map((detail) => detail.message);
-      res.status(422).send({ message: errors });
-      return;
-    }
-
-    const classificationExist = await fetchClassificationById(
-      curiosity.classificationsId
-    );
-    if (!classificationExist) {
-      res.status(400).send({ message: "Invalid classification" });
-      return;
-    }
-
-    next();
-  } catch (err) {
-    res.status(500).send({ message: err.message });
+  const { error } = curiositySchema.validate(curiosity, {
+    abortEarly: false,
+  });
+  if (error) {
+    const errors = error.details.map((detail) => detail.message);
+    res.status(422).send({ message: errors });
+    return;
   }
+
+  await checkIfClassificationExistsById(curiosity.classificationsId);
+
+  next();
 }
 
 export async function validUpdateCuriosity(
@@ -74,16 +63,7 @@ export async function validateIfCuriosityExists(
 ): Promise<void> {
   const curiosityId: number = Number(req.params.id);
 
-  try {
-    const curiosityExist = await fetchCuriosityById(curiosityId);
-    if (!curiosityExist) {
-      res.status(400).send({ message: "Invalid curiosity" });
-      return;
-    }
+  await checkByIdIfCuriosityExists(curiosityId);
 
-    next();
-  } catch (err) {
-
-    res.status(500).send({ message: err.message });
-  }
+  next();
 }
